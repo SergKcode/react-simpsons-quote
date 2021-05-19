@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+import QuoteCard from './components/QuoteCard';
 import './App.css';
+import React from "react";
+import { useAxios } from './hook/useAxios';
 
 function App() {
+  
+  const  {data} = useAxios('https://simpsons-quotes-api.herokuapp.com/quotes')
+  console.log (data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Simpson quote</h1>
+      <QuoteCard data={data}/>
+    </>
   );
 }
+
 
 export default App;
