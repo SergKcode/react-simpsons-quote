@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-export const useAxios = ( url ) => {
-    const [state, setState] = useState({ data: null, loading: true, error: null });
+export const useAxios = ( url, change ) => {
+    const [state, setState] = useState({ data: null, loaded: false, error: null });
 
     useEffect( () => {
 
-        setState({ data: null, loading: true, error: null });
+        setState({ data: null,  loaded: false, error: null });
 
         axios
         .get(url)
@@ -16,7 +16,7 @@ export const useAxios = ( url ) => {
         // Use this data to update the state
         .then( data => {
             setState({
-                loading: false,
+                loaded: true,
                 error: null,
                 data
             });
@@ -24,7 +24,7 @@ export const useAxios = ( url ) => {
 
     });
 
-    },[])
+    },[change])
 
     return state;
 }

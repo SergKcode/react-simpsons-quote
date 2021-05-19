@@ -1,17 +1,22 @@
 import QuoteCard from './components/QuoteCard';
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import { useAxios } from './hook/useAxios';
 
 function App() {
-  
-  const  {data} = useAxios('https://simpsons-quotes-api.herokuapp.com/quotes')
-  console.log (data)
+  const [change, setChange] = useState(false)
+  const  {data, loaded} = useAxios('https://simpsons-quotes-api.herokuapp.com/quotes' , change)
+  const handleButton = ()=>{
+    setChange(!change)
+
+  }
 
   return (
     <>
       <h1>Simpson quote</h1>
-      <QuoteCard data={data}/>
+      {loaded && <QuoteCard data={data} loaded={loaded}/>}
+      <button onClick={handleButton}></button>
+      
     </>
   );
 }
